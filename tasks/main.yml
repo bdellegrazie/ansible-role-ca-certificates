@@ -1,0 +1,10 @@
+---
+- include_vars: "defaults-{{ ansible_os_family }}.yml"
+
+- include: ca_certificates-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: ca_certificates-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: ca_certificates-trusted.yml

@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  author: Brett Delle Grazie
+  description: Role to manage CA Certificates
+
+  license: GPLv3
+
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
+  - name: Fedora
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+
+  galaxy_tags:
+  - certificates
+  - certs
+  - sslcerts
+
+dependencies: []
