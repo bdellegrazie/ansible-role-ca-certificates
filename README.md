@@ -3,6 +3,8 @@ ca-certificates
 
 This role manages ca-certificates on Debian / RedHat family OS, it uses the OS native certificate management tool to do this. The OS tools usually manage OpenJDK cacerts file too
 
+[![Build Status](https://travis-ci.org/bdellegrazie/ansible-role-ca-certificates.svg?branch=master)](https://travis-ci.org/bdellegrazie/ansible-role-ca-certificates)
+
 Role Variables
 --------------
 
