@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: ansible_playbook
+  hosts: test-kitchen
+  require_ansible_repo: true
+  require_chef_for_busser: false
+  require_ruby_for_busser: true
+  ansible_host_key_checking: false
+  ansible_verbosity: 2
+  ansible_verbose: true
+  ansible_version: latest
+  ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
+
+
+platforms:
+  - name: centos/6
+    driver_plugin: vagrant
+    driver_config:
+      box: centos/6
+  - name: debian/8
+    driver_plugin: vagrant
+    driver_config:
+      box: debian/contrib-jessie64
+suites:
+  - name: default
+    run_list:
+    attributes:
+
+verifier:
+  ruby_bindir: '/usr/bin'
