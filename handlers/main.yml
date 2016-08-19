@@ -1,8 +1,8 @@
 ---
-- name: ca-certificates update (Debian)
+- name: update ca-certificates (Debian)
   command: /usr/sbin/update-ca-certificates
   when: ansible_os_family == 'Debian'
 
-- name: ca-certificates update (RedHat)
+- name: update ca-certificates (RedHat)
   command: /usr/bin/update-ca-trust
   when: ansible_os_family == 'RedHat'
