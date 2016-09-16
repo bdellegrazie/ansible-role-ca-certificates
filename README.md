@@ -8,7 +8,7 @@ This role manages ca-certificates on Debian / RedHat family OS, it uses the OS n
 Role Variables
 --------------
 
-    ca_certificate_handler: "notify" this variable triggers update of OS of CA certificates
+    ca_certificates_handler: "notify" this variable triggers update of OS of CA certificates
     ca_certificates_local_dir: the directory to copy CA Certificates to, set in vars
     ca_certificates_trusted: List of name/pem certificate pairs to copy to ca_certificates_local_dir
 
