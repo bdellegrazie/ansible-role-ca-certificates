@@ -1,6 +1,8 @@
 ---
 - name: "Install ca-certificates package"
-  yum:  name=ca-certificates state=present
+  yum:
+    name: ca-certificates
+    state: present
 
 - name: "Check CA Trust Expansion state"
   command: "/usr/bin/update-ca-trust check"
