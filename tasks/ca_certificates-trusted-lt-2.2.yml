@@ -1,0 +1,11 @@
+---
+- name: Install trusted CA Certificates
+  copy:
+    content: "{{ item.pem }}"
+    dest: "{{ ca_certificates_local_dir }}/{{ item.name }}.crt"
+    group: root
+    mode: '0644'
+    owner: root
+  with_items: "{{ ca_certificates_trusted }}"
+  no_log: true
+  notify: "{{ ca_certificates_handler }}"

@@ -1,33 +1,42 @@
 ---
 driver:
-  name: vagrant
+  name: docker
+  use_sudo: false
 
 provisioner:
   name: ansible_playbook
   hosts: test-kitchen
-  require_ansible_repo: true
   require_chef_for_busser: false
-  require_ruby_for_busser: true
-  ansible_host_key_checking: false
-  ansible_verbosity: 2
-  ansible_verbose: true
+  require_ruby_for_busser: false
+  ansible_verbose: false
+  ansible_verbosity: :warn
   ansible_version: latest
   ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
-
+  group_vars_path: test/integration/group_vars
+  ignore_paths_from_root:
+    - .bundle
+    - tests
+    - vendor
+  idempotency_test: true
 
 platforms:
-  - name: centos/6
-    driver_plugin: vagrant
+  - name: centos-6.8
+  - name: centos-7
+  - name: debian-8.6
     driver_config:
-      box: centos/6
-  - name: debian/8
-    driver_plugin: vagrant
-    driver_config:
-      box: debian/contrib-jessie64
+      # Debian Backports for recent Ansible
+      provision_command:
+      - 'echo "deb http://ftp.uk.debian.org/debian jessie main\ndeb http://ftp.uk.debian.org/debian jessie-updates main\ndeb http://ftp.uk.debian.org/debian jessie-backports main\ndeb http://security.debian.org jessie/updates main" > /etc/apt/sources.list'
+      - 'echo "Package: ansible\nPin: release a=jessie-backports\nPin-Priority: 999\n" > /etc/apt/preferences.d/ansible'
+  - name: ubuntu-16.04
+
 suites:
   - name: default
-    run_list:
-    attributes:
+    verifier:
+      default_path: test/integration/default/serverspec
 
 verifier:
-  ruby_bindir: '/usr/bin'
+  name: serverspec
+  remote_exec: false
+  patterns:
+    - '**/*_spec.rb'
