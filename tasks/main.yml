@@ -1,15 +1,17 @@
 ---
-
 - name: Load OS Family specific defaults
   include_vars: "defaults-{{ ansible_os_family }}.yml"
 
-- name: Debian Family
-  include: ca_certificates-Debian.yml
-  when: ansible_os_family == 'Debian'
+- name: Install CA Certificates package
+  become: true
+  package:
+    name: ca-certificates
+    state: present
 
-- name: RedHat Family
-  include: ca_certificates-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+- name: Enable Cert Management (RHEL 6 only)
+  include: ca_certificates-RedHat-6.yml
+  static: false
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'
 
 - name: Install Trusted (Ansible < 2.2)
   include: ca_certificates-trusted-lt-2.2.yml
