@@ -7,4 +7,6 @@
     mode: '0644'
     owner: root
   with_items: "{{ ca_certificates_trusted }}"
+  loop_control:
+    label: "{{ item.name }}"
   notify: "{{ ca_certificates_handler }}"

@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
-  remote_user: root
+# taken from: http://www.jeffgeerling.com/blog/2016/how-i-test-ansible-configuration-on-7-different-oses-docker
+- hosts: all
   roles:
-    - ansible-role-ca-certificates
+    - role_under_test

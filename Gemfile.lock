@@ -1,27 +1,89 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    artifactory (2.3.3)
-    kitchen-ansible (0.44.6)
+    annoy (0.5.6)
+      highline (>= 1.5.0)
+    artifactory (2.5.1)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
+    diff-lcs (1.2.5)
+    docile (1.1.5)
+    drydock (0.6.9)
+    elecksee (1.1.8)
+      childprocess
+      rye
+    ffi (1.9.14)
+    highline (1.7.8)
+    kitchen-ansible (0.45.5)
       net-ssh (~> 3.0)
       test-kitchen (~> 1.4)
-    kitchen-vagrant (0.20.0)
+    kitchen-docker (2.6.0)
+      test-kitchen (>= 1.0.0)
+    kitchen-lxc (0.1.4)
+      elecksee (~> 1.0, >= 1.0.22)
+      test-kitchen (~> 1.2, >= 1.2.1)
+    kitchen-verifier-serverspec (0.6.0)
+      net-ssh (~> 3)
       test-kitchen (~> 1.4)
-    mixlib-install (1.1.0)
+    mixlib-install (2.1.6)
       artifactory
       mixlib-shellout
       mixlib-versioning
-    mixlib-shellout (2.2.6)
+      thor
+    mixlib-shellout (2.2.7)
     mixlib-versioning (1.1.0)
+    multi_json (1.12.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    net-telnet (0.1.1)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+    rspec-core (3.5.4)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
+    rspec-mocks (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
+    rye (0.9.13)
+      annoy
+      docile (>= 1.0.1)
+      highline (>= 1.5.1)
+      net-scp (>= 1.0.2)
+      net-ssh (>= 2.0.13)
+      sysinfo (>= 0.8.1)
     safe_yaml (1.0.4)
-    test-kitchen (1.10.2)
-      mixlib-install (~> 1.0, >= 1.0.4)
+    serverspec (2.37.2)
+      multi_json
+      rspec (~> 3.0)
+      rspec-its
+      specinfra (~> 2.53)
+    sfl (2.3)
+    specinfra (2.66.0)
+      net-scp
+      net-ssh (>= 2.7, < 4.0)
+      net-telnet
+      sfl
+    storable (0.8.9)
+    sysinfo (0.8.1)
+      drydock
+      storable
+    test-kitchen (1.13.2)
+      mixlib-install (>= 1.2, < 3.0)
       mixlib-shellout (>= 1.2, < 3.0)
       net-scp (~> 1.1)
       net-ssh (>= 2.9, < 4.0)
+      net-ssh-gateway (~> 1.2.0)
       safe_yaml (~> 1.0)
       thor (~> 0.18)
     thor (0.19.1)
@@ -31,7 +93,11 @@ PLATFORMS
 
 DEPENDENCIES
   kitchen-ansible
-  kitchen-vagrant
+  kitchen-docker
+  kitchen-lxc
+  kitchen-verifier-serverspec
+  net-ssh
+  serverspec
   test-kitchen
 
 BUNDLED WITH
