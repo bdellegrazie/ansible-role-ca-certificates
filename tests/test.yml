@@ -1,5 +1,0 @@
----
-# taken from: http://www.jeffgeerling.com/blog/2016/how-i-test-ansible-configuration-on-7-different-oses-docker
-- hosts: all
-  roles:
-    - role_under_test

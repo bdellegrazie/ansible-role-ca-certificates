@@ -9,7 +9,7 @@ Serverspec.describe 'ca-certificates' do
   describe "x509 example certificate" do
     let(:ca_certificates_dir) {
       case os[:family]
-      when 'redhat'
+      when 'redhat','fedora'
         return '/etc/pki/ca-trust/source/anchors'
       when 'debian'
         return '/usr/local/share/ca-certificates'
@@ -24,9 +24,10 @@ Serverspec.describe 'ca-certificates' do
     its(:subject) { should eq('/C=UK/ST=England/L=London/O=Example Org/OU=Org/CN=www.example.com') }
   end
 
-  describe command("/usr/bin/update-ca-trust check"), :sudo => false, :if => os[:family] == 'redhat' do
+  describe command("/usr/bin/update-ca-trust check"), :sudo => false, :if => (os[:family] == 'redhat' and host_inventory[:platform_version] < '7.0') do
     let(:disable_sudo) { true }
     its(:stdout) { should match /PEM.*Status.*ENABLED/ }
   end
+  # RedHat 7+ doesn't have 'check'
   # Debian's ca-certificates is enabled if installed
 end

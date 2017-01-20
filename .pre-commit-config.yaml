@@ -1,5 +1,5 @@
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: 7539d8bd1a00a3c1bfd34cdb606d3a6372e83469
+    sha: 5da199bb8d60f764c0f77a20b0a1dc3a7640bcdd
     hooks:
     -   id: trailing-whitespace
         files: \.(js|json|rb|md|py|sh|txt|yaml|yml)$
@@ -7,9 +7,25 @@
     -   id: check-case-conflict
     -   id: check-json
     -   id: end-of-file-fixer
-- repo: https://github.com/willthames/ansible-lint.git
-  sha: v3.4.3
-  hooks:
-    - id: ansible-lint
-      files: \.(yaml|yml)$
-      args: [--exclude=.travis.yml]
+-   repo: https://github.com/willthames/ansible-lint.git
+    sha: v3.4.10
+    hooks:
+    -   id: ansible-lint
+        files: \.(yaml|yml)$
+        args:
+        - --exclude=.travis.yml
+-   repo: local
+    hooks:
+    -   id: travis-lint
+        name: Travis Lint
+        entry: bundle
+        language: system
+        files: ^\.travis\.yml$
+        args:
+        - exec
+        - travis
+        - lint
+        - --no-interactive
+        - --skip-version-check
+        - --skip-completion-check
+        - --exit-code

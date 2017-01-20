@@ -1,0 +1,16 @@
+---
+- name: "Check CA Trust Expansion state"
+  become: true
+  command: "/usr/bin/update-ca-trust check"
+  check_mode: no
+  changed_when: false
+  register: result
+
+- name: "Set CA Trust fact"
+  set_fact:
+    ca_trust_expanded: "{{ result.stdout.find( 'PEM/JAVA Status: ENABLED.') != -1 }}"
+
+- name: "Enable CA Trust Expansion"
+  become: true
+  command: update-ca-trust enable
+  when: not ca_trust_expanded
