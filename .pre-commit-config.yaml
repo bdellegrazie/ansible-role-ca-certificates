@@ -1,5 +1,5 @@
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: 5da199bb8d60f764c0f77a20b0a1dc3a7640bcdd
+    sha: e626cd57090d8df0be21e4df0f4e55cc3511d6ab
     hooks:
     -   id: trailing-whitespace
         files: \.(js|json|rb|md|py|sh|txt|yaml|yml)$
@@ -8,7 +8,7 @@
     -   id: check-json
     -   id: end-of-file-fixer
 -   repo: https://github.com/willthames/ansible-lint.git
-    sha: v3.4.10
+    sha: v3.4.11
     hooks:
     -   id: ansible-lint
         files: \.(yaml|yml)$
