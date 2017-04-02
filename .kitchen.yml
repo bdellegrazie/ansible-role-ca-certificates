@@ -16,6 +16,8 @@ provisioner:
   ansible_version: latest
   ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
   group_vars_path: test/integration/group_vars
+  env_vars:
+    ANSIBLE_FORCE_COLOR: 1
   ignore_paths_from_root:
     - .bundle
     - .kitchen
