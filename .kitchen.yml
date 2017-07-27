@@ -44,27 +44,10 @@ platforms:
   - name: debian-8
     driver_config:
       platform: debian
-      image: geerlingguy/docker-debian8-ansible:latest
+      image: bdellegrazie/docker-debian8-ansible:latest
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /sbin/init
-  - name: ubuntu-12.04
-    driver_config:
-      platform: ubuntu
-      image: bdellegrazie/docker-ubuntu1204-ansible:latest
-      privileged: true
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /sbin/init
-  - name: ubuntu-14.04
-    driver_config:
-      platform: ubuntu
-      image: bdellegrazie/docker-ubuntu1404-ansible:latest
-      privileged: true
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /sbin/init
   - name: ubuntu-16.04
     driver_config:
       platform: ubuntu
