@@ -15,21 +15,21 @@ Serverspec.describe 'ca-certificates' do
     let(:ca_certificates_local_dir) {
       case os[:family]
       when 'redhat','fedora'
-        return '/etc/pki/ca-trust/source/anchors'
+        '/etc/pki/ca-trust/source/anchors'
       when 'debian'
-        return '/usr/local/share/ca-certificates'
+        '/usr/local/share/ca-certificates'
       when 'ubuntu'
-        return '/usr/local/share/ca-certificates'
+        '/usr/local/share/ca-certificates'
       end
     }
     let(:ca_certificates_bundle) {
       case os[:family]
       when 'redhat','fedora'
-        return '/etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt'
+        '/etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt'
       when 'debian'
-        return '/etc/ssl/certs/ca-certificates.crt'
+        '/etc/ssl/certs/ca-certificates.crt'
       when 'ubuntu'
-        return '/etc/ssl/certs/ca-certificates.crt'
+        '/etc/ssl/certs/ca-certificates.crt'
       end
     }
 
