@@ -9,4 +9,5 @@
   with_items: "{{ ca_certificates_trusted }}"
   loop_control:
     label: "{{ item.name }}"
-  notify: "{{ ca_certificates_handler }}"
+  register: _ca_certificates_copied
+  notify: update ca-certificates

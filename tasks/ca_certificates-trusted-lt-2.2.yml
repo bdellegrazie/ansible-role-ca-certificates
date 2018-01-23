@@ -8,4 +8,5 @@
     owner: root
   with_items: "{{ ca_certificates_trusted }}"
   no_log: true
-  notify: "{{ ca_certificates_handler }}"
+  register: _ca_certificates_copied
+  notify: update ca-certificates

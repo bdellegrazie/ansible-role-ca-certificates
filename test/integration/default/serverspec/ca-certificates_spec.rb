@@ -36,7 +36,7 @@ Serverspec.describe 'ca-certificates' do
     subject! { x509_certificate("#{ca_certificates_local_dir}/www.example.com.crt") }
 
     it { should be_certificate }
-    its(:subject) { should eq('/C=UK/ST=England/L=London/O=Example Org/OU=Org/CN=www.example.com') }
+    its(:subject) { should eq('/C=UK/ST=England/L=London/O=Example Org/OU=Org/CN=www.example.com/emailAddress=brett.dellegrazie@gmail.com') }
 
     describe "verify certificates" do
       it "should openssl verify certificate" do

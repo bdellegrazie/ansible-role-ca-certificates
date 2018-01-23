@@ -1,6 +1,6 @@
 ---
 dist: trusty
-
+sudo: required
 env:
   matrix:
     - distro=centos version='6'
