@@ -11,7 +11,7 @@ Serverspec.describe 'ca-certificates' do
     its(:stdout) { should match /PEM.*Status.*ENABLED/ }
   end
 
-  describe "x509 example certificate" do
+  describe "x509 certificates" do
     let(:ca_certificates_local_dir) {
       case os[:family]
       when 'redhat','fedora'
@@ -33,14 +33,22 @@ Serverspec.describe 'ca-certificates' do
       end
     }
 
-    subject! { x509_certificate("#{ca_certificates_local_dir}/www.example.com.crt") }
+    describe "example cert" do
+      subject! { x509_certificate("#{ca_certificates_local_dir}/www.example.com.crt") }
+      it { should be_certificate }
+      its(:subject) { should eq('/C=UK/ST=England/L=London/O=Example Org/OU=Org/CN=www.example.com/emailAddress=brett.dellegrazie@gmail.com') }
+    end
 
-    it { should be_certificate }
-    its(:subject) { should eq('/C=UK/ST=England/L=London/O=Example Org/OU=Org/CN=www.example.com/emailAddress=brett.dellegrazie@gmail.com') }
+    describe "cacert.org cert" do
+      subject! { x509_certificate("#{ca_certificates_local_dir}/cacert.org.crt") }
+      it { should be_certificate }
+      its(:subject) { should eq('/O=Root CA/OU=http://www.cacert.org/CN=CA Cert Signing Authority/emailAddress=support@cacert.org') }
+    end
 
     describe "verify certificates" do
       it "should openssl verify certificate" do
         expect( command("openssl verify -CAfile #{ca_certificates_bundle} #{ca_certificates_local_dir}/www.example.com.crt").stdout).to match /: OK$/
+        expect( command("openssl verify -CAfile #{ca_certificates_bundle} #{ca_certificates_local_dir}/cacert.org.crt").stdout).to match /: OK$/
       end
     end
   end

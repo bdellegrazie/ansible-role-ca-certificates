@@ -26,3 +26,5 @@ ca_certificates_trusted:
     SX8IqiBLQNdE4kvgEjkGBRECkOqAhvESHpUSXnZvbGxdk9akySned6vAEZi2EPWV
     I0d6EeINOQ2TxT++dsg5y1O2TKog5YiT12HZrdQ=
     -----END CERTIFICATE-----
+- name: cacert.org
+  remote_pem: http://www.cacert.org/certs/root.crt
