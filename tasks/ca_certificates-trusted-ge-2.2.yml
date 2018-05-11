@@ -7,7 +7,22 @@
     mode: '0644'
     owner: root
   with_items: "{{ ca_certificates_trusted }}"
+  when: item.pem is defined
   loop_control:
     label: "{{ item.name }}"
   register: _ca_certificates_copied
+  notify: update ca-certificates
+
+- name: Install remote trusted CA Certificates
+  get_url:
+    url: "{{ item.remote_pem }}"
+    dest: "{{ ca_certificates_local_dir }}/{{ item.name }}.crt"
+    group: root
+    mode: '0644'
+    owner: root
+  with_items: "{{ ca_certificates_trusted }}"
+  when: item.remote_pem is defined
+  loop_control:
+    label: "{{ item.name }}"
+  register: _ca_certificates_written
   notify: update ca-certificates

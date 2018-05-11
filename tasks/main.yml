@@ -35,4 +35,5 @@
   command: "{{ ca_certificates_handler }}"
   when:
     - _ca_certificates_copied | changed
+    - _ca_certificates_written | changed
     - ca_certificates_update | bool
