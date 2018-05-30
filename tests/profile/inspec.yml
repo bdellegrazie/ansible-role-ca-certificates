@@ -1,0 +1,12 @@
+---
+name: ca_certificates
+title: CA Certificates
+maintainer: Brett Delle Grazie
+copyright: N/A
+copyright_email: brett.dellegrazie@gmail.com
+license: MIT
+summary: Verify that CA certificates role is working correctly
+version: 1.0.0
+supports:
+  - os-family: linux
+inspec_version: "~> 2.1"

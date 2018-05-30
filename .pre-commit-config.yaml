@@ -15,18 +15,18 @@ repos:
         files: \.(yaml|yml)$
         args:
         - --exclude=.travis.yml
--   repo: local
-    hooks:
-    -   id: travis-lint
-        name: Travis Lint
-        entry: bundle
-        language: system
-        files: ^\.travis\.yml$
-        args:
-        - exec
-        - travis
-        - lint
-        - --no-interactive
-        - --skip-version-check
-        - --skip-completion-check
-        - --exit-code
+  #-   repo: local
+  #  hooks:
+  #  -   id: travis-lint
+  #      name: Travis Lint
+  #      entry: bundle
+  #      language: system
+  #      files: ^\.travis\.yml$
+  #      args:
+  #      - exec
+  #      - travis
+  #      - lint
+  #      - --no-interactive
+  #      - --skip-version-check
+  #      - --skip-completion-check
+  #      - --exit-code
