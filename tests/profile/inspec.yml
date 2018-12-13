@@ -8,5 +8,7 @@ license: MIT
 summary: Verify that CA certificates role is working correctly
 version: 1.0.0
 supports:
-  - os-family: linux
-inspec_version: "~> 2.1"
+  - platform-family: redhat
+  - platform-family: debian
+  - platform-family: fedora
+inspec_version: "~> 3.0"
