@@ -2,7 +2,7 @@
 - name: "Check CA Trust Expansion state"
   become: true
   command: "/usr/bin/update-ca-trust check"
-  check_mode: no
+  check_mode: false
   changed_when: false
   register: result
 

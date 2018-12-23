@@ -8,23 +8,23 @@ galaxy_info:
   min_ansible_version: 2.4
 
   platforms:
-  - name: EL
-    versions:
-    - 6
-    - 7
-  - name: Fedora
-    versions:
-    - all
-  - name: Ubuntu
-    versions:
-    - all
-  - name: Debian
-    versions:
-    - all
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
 
   galaxy_tags:
-  - certificates
-  - certs
-  - sslcerts
+    - certificates
+    - certs
+    - sslcerts
 
 dependencies: []

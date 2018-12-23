@@ -1,0 +1,71 @@
+---
+dependency:
+  name: gilt
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: "centos6"
+    image: "geerlingguy/docker-centos6-ansible"
+    pull: true
+    pre_build_image: true
+    command: "/sbin/init"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: "centos7"
+    image: "geerlingguy/docker-centos7-ansible:testing"
+    pull: true
+    pre_build_image: true
+    command: "/usr/sbin/init"
+    # https://github.com/ansible/ansible/issues/18692
+    kill_signal: "RTMIN+3"
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    tmpfs:
+      - "/run"
+  - name: "debian9"
+    image: "geerlingguy/docker-debian9-ansible:testing"
+    pull: true
+    pre_build_image: true
+    command: "/lib/systemd/systemd"
+    # https://github.com/ansible/ansible/issues/18692
+    # kill_signal: "RTMIN+3"
+    # capabilities:
+    #   - SYS_ADMIN
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    tmpfs:
+      - "/run"
+      - "/tmp"
+  - name: "ubuntu1804"
+    image: "geerlingguy/docker-ubuntu1804-ansible:testing"
+    pull: true
+    pre_build_image: true
+    command: "/sbin/init"
+    # https://github.com/ansible/ansible/issues/18692
+    kill_signal: "RTMIN+3"
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    tmpfs:
+      - "/run"
+      - "/tmp"
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      fact_caching: jsonfile
+      fact_caching_connection: $MOLECULE_EPHEMERAL_DIRECTORY/.facts
+      fact_caching_timeout: 600
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: inspec
+  lint:
+    name: rubocop

@@ -1,0 +1,12 @@
+.bundle
+docker
+.dockerignore
+Gemfile*
+.git*
+.pre-commit-config.yaml
+*.md
+.travis.yml
+.kitchen*
+Rakefile
+test*
+vendor

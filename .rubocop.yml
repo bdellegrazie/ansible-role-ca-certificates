@@ -1,0 +1,8 @@
+---
+# Convenience for Inspec tests
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false

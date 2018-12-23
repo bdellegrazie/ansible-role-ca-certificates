@@ -11,6 +11,7 @@ build
 .project
 .pydevproject
 .settings/
+.venv/
 
 # Mac OS X stuff...
 .DS_Store

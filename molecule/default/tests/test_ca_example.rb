@@ -5,23 +5,25 @@ control 'ca-cert-example' do
     Ensure Example CA Certificate is visible and deployed
   '
 
-  ca_certificates_local_dir = case os.family
-    when 'redhat','fedora'
+  ca_certificates_local_dir =
+    case os.family
+    when 'redhat', 'fedora'
       '/etc/pki/ca-trust/source/anchors'
     when 'debian'
       '/usr/local/share/ca-certificates'
     when 'ubuntu'
       '/usr/local/share/ca-certificates'
-  end
+    end
 
-  ca_certificates_bundle = case os.family
-    when 'redhat','fedora'
+  ca_certificates_bundle =
+    case os.family
+    when 'redhat', 'fedora'
       '/etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt'
     when 'debian'
       '/etc/ssl/certs/ca-certificates.crt'
     when 'ubuntu'
       '/etc/ssl/certs/ca-certificates.crt'
-  end
+    end
 
   describe x509_certificate("#{ca_certificates_local_dir}/www.example.com.crt") do
     it { should be_certificate }
@@ -32,6 +34,6 @@ control 'ca-cert-example' do
   # The certificate must be in the trust store for this to work
   describe command("openssl verify -CAfile #{ca_certificates_bundle} #{ca_certificates_local_dir}/www.example.com.crt") do
     its('exit_status') { should eq 0 }
-    its('stdout') { should match (/: OK$/) }
+    its('stdout') { should match(/: OK$/) }
   end
 end
