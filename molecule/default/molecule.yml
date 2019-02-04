@@ -61,11 +61,12 @@ provisioner:
       fact_caching: jsonfile
       fact_caching_connection: $MOLECULE_EPHEMERAL_DIRECTORY/.facts
       fact_caching_timeout: 600
+      gather_timeout: 20
   lint:
     name: ansible-lint
 scenario:
   name: default
 verifier:
-  name: inspec
+  name: goss
   lint:
-    name: rubocop
+    name: yamllint

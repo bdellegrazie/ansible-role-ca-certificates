@@ -1,32 +1,22 @@
+---
 repos:
--   repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v2.0.0
+  - repo: https://github.com/pre-commit/pre-commit-hooks.git
+    rev: v2.1.0
     hooks:
-    -   id: trailing-whitespace
+      - id: trailing-whitespace
         files: \.(js|json|rb|md|py|sh|txt|yaml|yml)$
-    -   id: check-yaml
-    -   id: check-case-conflict
-    -   id: check-json
-    -   id: end-of-file-fixer
--   repo: https://github.com/willthames/ansible-lint.git
-    rev: v3.5.1
+      - id: check-yaml
+        exclude: molecule/default/tests/test_ca_certificates.yml
+      - id: check-case-conflict
+      - id: check-json
+      - id: end-of-file-fixer
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.14.0
     hooks:
-    -   id: ansible-lint
+      - id: yamllint
+  - repo: https://github.com/willthames/ansible-lint.git
+    rev: v4.0.1
+    hooks:
+      - id: ansible-lint
         files: \.(yaml|yml)$
-        args:
-        - --exclude=.travis.yml
-  #-   repo: local
-  #  hooks:
-  #  -   id: travis-lint
-  #      name: Travis Lint
-  #      entry: bundle
-  #      language: system
-  #      files: ^\.travis\.yml$
-  #      args:
-  #      - exec
-  #      - travis
-  #      - lint
-  #      - --no-interactive
-  #      - --skip-version-check
-  #      - --skip-completion-check
-  #      - --exit-code
+        exclude: molecule/default/tests/test_ca_certificates.yml

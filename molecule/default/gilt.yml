@@ -1,4 +1,0 @@
----
-- git: 'https://github.com/bdellegrazie/ansible-role-serverspec_test_dependencies.git'
-  version: 'v0.0.9'
-  dst: $MOLECULE_EPHEMERAL_DIRECTORY/roles/bdellegrazie.ansible-role-serverspec_test_dependencies/

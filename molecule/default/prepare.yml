@@ -1,4 +1,9 @@
 ---
 - hosts: all
-  roles:
-    - bdellegrazie.ansible-role-serverspec_test_dependencies
+  tasks:
+    - name: Install test packages
+      package:
+        name: openssl
+      register: _install
+      until: _install is succeeded
+      retries: 3

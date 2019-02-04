@@ -1,0 +1,36 @@
+---
+package:
+  'ca-certificates':
+    installed: true
+
+file:
+  '{{ .Env.LOCAL_CACERTS }}/cacert.org.crt':
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+  '{{ .Env.LOCAL_CACERTS }}/www.example.com.crt':
+    exists: true
+    owner: root
+    group: root
+    filetype: file
+
+command:
+  '/usr/bin/openssl x509 -in {{ .Env.LOCAL_CACERTS }}/cacert.org.crt -noout -fingerprint':
+    exit-status: 0
+    stdout:
+      - 'SHA1 Fingerprint=13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33'
+  '/usr/bin/openssl x509 -in {{ .Env.LOCAL_CACERTS }}/www.example.com.crt -noout -fingerprint':
+    exit-status: 0
+    stdout:
+      - 'SHA1 Fingerprint=9C:B7:F4:89:58:0F:AE:F6:A3:27:CA:B6:34:51:A0:11:FA:0A:1E:F1'
+  '/usr/bin/openssl verify -CAfile {{ .Env.TRUST_CACERTS }} {{ .Env.LOCAL_CACERTS }}/www.example.com.crt':
+    exit-status: 0
+    stdout:
+      - /OK/
+{{ if and (eq .Env.OS_FAMILY "redhat") (lt .Env.DISTRO_MAJOR_VERSION "7") }}
+  '/usr/bin/update-ca-trust check':
+    exit-status: 0
+    stdout:
+      - /PEM.*Status.*ENABLED/
+{{ end }}
