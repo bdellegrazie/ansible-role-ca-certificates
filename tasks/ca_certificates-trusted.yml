@@ -1,5 +1,6 @@
 ---
 - name: Install trusted CA Certificates
+  become: true
   copy:
     content: "{{ item.pem }}"
     dest: "{{ ca_certificates_local_dir }}/{{ item.name }}.crt"
@@ -14,6 +15,7 @@
   notify: update ca-certificates
 
 - name: Install remote trusted CA Certificates
+  become: true
   get_url:
     url: "{{ item.remote_pem }}"
     dest: "{{ ca_certificates_local_dir }}/{{ item.name }}.crt"
