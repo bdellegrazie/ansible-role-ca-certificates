@@ -70,3 +70,4 @@ verifier:
   name: goss
   lint:
     name: yamllint
+    enabled: false
