@@ -37,4 +37,5 @@ Contributors
 Thank you!
 
 [Sean O'Keeffe](https://github.com/sean797) [Add ability to fetch CA cert #4](https://github.com/bdellegrazie/ansible-role-ca-certificates/pull/4)
+
 [Emii Khaos](https://github.com/EmiiKhaos) [Fix update handler name to match the one defined in default vars #1](https://github.com/bdellegrazie/ansible-role-ca-certificates/pull/1)
