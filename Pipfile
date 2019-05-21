@@ -11,6 +11,6 @@ python-gilt = "*"
 yamllint = "*"
 
 [packages]
-ansible = "==2.7.9"
+ansible = "==2.8.0"
 passlib = "*"
 six = "*"

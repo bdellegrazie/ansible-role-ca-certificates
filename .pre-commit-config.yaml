@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks.git
-    rev: v2.1.0
+    rev: v2.2.3
     hooks:
       - id: trailing-whitespace
         files: \.(js|json|rb|md|py|sh|txt|yaml|yml)$
