@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
-- Updated Ansible for tests to 2.8.2
+- Updated Ansible for tests to 2.8.3
+- Updated Goss for tests to 0.3.7
 - Updated pre-commit (minor)
 ### Deprecated
 ### Removed
