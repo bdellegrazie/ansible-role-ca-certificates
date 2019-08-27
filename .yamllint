@@ -3,6 +3,7 @@ ignore: |
   .pre-commit-config.yaml
   .travis.yml
   /molecule/default/tests/
+  /.venv/
 
 rules:
   braces:
