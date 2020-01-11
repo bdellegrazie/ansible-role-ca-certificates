@@ -7,20 +7,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
-- Updated Ansible for tests to 2.8.3
-- Updated Goss for tests to 0.3.7
-- Updated pre-commit (minor)
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [3.1.0] - 2020-01-11
+### Changed
+- Update Ansible to 2.9.2
+- minor pre-commit updates
+- minor molecule updates
+
+## [3.0.0] - 2019-08-27
+### Changed
+- Updated Ansible for tests to 2.8.4
+- Updated Goss for tests to 0.3.7
+- Updated pre-commit (minor)
 
 ## [2.1.1] - 2019-02-05
 ### Added
 - Updated Travis build process to use newer molecule process
 - Minor linting changes
 
-[Unreleased]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v2.1.0..HEAD
+[Unreleased]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v3.1.0..HEAD
+[v3.1.0]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v3.0.0..v3.1.0
+[v3.0.0]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v2.1.1..v3.0.0
+[v2.1.1]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v2.1.0..v2.1.1
 [v2.1.0]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v2.0.0..v2.1.0
 [v2.0.0]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v1.0.1..v2.0.0
 [v1.0.1]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v1.0.0..v1.0.1
