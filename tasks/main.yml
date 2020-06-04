@@ -21,6 +21,6 @@
   become: true
   command: "{{ ca_certificates_handler }}"
   when:
-    - _ca_certificates_copied is changed
-    - _ca_certificates_written is changed
+    - _ca_certificates_copied is changed or
+      _ca_certificates_written is changed
     - ca_certificates_update | bool

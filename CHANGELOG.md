@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed issue where the update trigger is skipped
 ### Security
 
 ## [3.1.0] - 2020-01-11
