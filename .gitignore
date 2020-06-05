@@ -24,10 +24,5 @@ build
 *.retry
 ansible.cfg
 
-# Test kitchen
-.kitchen/
-.kitchen.local.yml
-
-# Ruby
-.bundle/
-vendor/
+# direnv
+.direnv/

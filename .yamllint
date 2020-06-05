@@ -2,7 +2,7 @@ extends: default
 ignore: |
   .pre-commit-config.yaml
   .travis.yml
-  /molecule/default/tests/
+  /molecule/default/molecule/
   /.venv/
 
 rules:

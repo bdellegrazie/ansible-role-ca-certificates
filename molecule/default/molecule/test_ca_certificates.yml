@@ -28,9 +28,11 @@ command:
     exit-status: 0
     stdout:
       - /OK/
-{{ if and (eq .Env.OS_FAMILY "redhat") (lt .Env.DISTRO_MAJOR_VERSION "7") }}
+{{ if and (eq .Env.OS_FAMILY "redhat") (lt (printf "%0.3s" .Env.DISTRO_MAJOR_VERSION) "007") }}
   '/usr/bin/update-ca-trust check':
     exit-status: 0
+{{ if (lt (printf "%0.3s" .Env.DISTRO_MAJOR_VERSION) "007") }}
     stdout:
       - /PEM.*Status.*ENABLED/
+{{ end }}
 {{ end }}

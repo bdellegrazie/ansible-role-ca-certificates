@@ -3,57 +3,105 @@ dependency:
   name: gilt
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
 platforms:
-  - name: "centos6"
+  - name: centos6
     image: "geerlingguy/docker-centos6-ansible"
     pull: true
     pre_build_image: true
     command: "/sbin/init"
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: "centos7"
-    image: "geerlingguy/docker-centos7-ansible:testing"
+  - name: centos7
+    image: docker.io/bdellegrazie/centos-systemd:7
     pull: true
     pre_build_image: true
-    command: "/usr/sbin/init"
-    # https://github.com/ansible/ansible/issues/18692
-    kill_signal: "RTMIN+3"
+    override_command: false
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: centos8
+    image: docker.io/bdellegrazie/centos-systemd:8
+    pull: true
+    pre_build_image: true
+    override_command: false
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: debian9
+    image: docker.io/bdellegrazie/debian-systemd:9
+    pull: true
+    pre_build_image: true
+    override_command: false
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: debian10
+    image: docker.io/bdellegrazie/debian-systemd:10
+    pull: true
+    pre_build_image: true
+    override_command: false
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora
+    image: docker.io/bdellegrazie/fedora-systemd:latest
+    pull: true
+    pre_build_image: true
+    override_command: false
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu16.04
+    image: docker.io/bdellegrazie/ubuntu-systemd:16.04
+    pull: true
+    pre_build_image: true
+    override_command: false
     capabilities:
       - SYS_ADMIN
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
     tmpfs:
-      - "/run"
-  - name: "debian9"
-    image: "geerlingguy/docker-debian9-ansible:testing"
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu18.04
+    image: docker.io/bdellegrazie/ubuntu-systemd:18.04
     pull: true
     pre_build_image: true
-    command: "/lib/systemd/systemd"
-    # https://github.com/ansible/ansible/issues/18692
-    # kill_signal: "RTMIN+3"
-    # capabilities:
-    #   - SYS_ADMIN
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    override_command: false
     tmpfs:
-      - "/run"
-      - "/tmp"
-  - name: "ubuntu1804"
-    image: "geerlingguy/docker-ubuntu1804-ansible:testing"
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu20.04
+    image: docker.io/bdellegrazie/ubuntu-systemd:20.04
     pull: true
     pre_build_image: true
-    command: "/sbin/init"
-    # https://github.com/ansible/ansible/issues/18692
-    kill_signal: "RTMIN+3"
-    capabilities:
-      - SYS_ADMIN
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    override_command: false
     tmpfs:
-      - "/run"
-      - "/tmp"
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
   config_options:
@@ -62,12 +110,6 @@ provisioner:
       fact_caching_connection: $MOLECULE_EPHEMERAL_DIRECTORY/.facts
       fact_caching_timeout: 600
       gather_timeout: 20
-  lint:
-    name: ansible-lint
-scenario:
-  name: default
+      interpreter_python: auto
 verifier:
-  name: goss
-  lint:
-    name: yamllint
-    enabled: false
+  name: ansible

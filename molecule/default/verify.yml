@@ -1,18 +1,16 @@
 ---
-# This is an example playbook to execute goss tests.
-# Tests need distributed to the appropriate ansible host/groups
-# prior to execution by `goss validate`.
+# Molecule Goss Tests
 
 - name: Verify
   hosts: all
   become: true
   vars:
-    goss_version: v0.3.7
+    goss_version: v0.3.10
     goss_arch: amd64
-    goss_dst: /usr/local/bin/goss
-    goss_sha256sum: 357f5c7f2e7949b412bce44349cd32ab19eb3947255a8ac805f884cc2c326059
+    goss_bin: /usr/local/bin/goss
+    goss_sha256sum: 150f25495ca0d1d4fd2ef8d0e750dbd767a15e9a522505f99b61dd1dd40a76d4
     goss_url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
-    goss_test_directory: /tmp
+    goss_test_directory: /tmp/molecule/goss
     goss_format: documentation
     local_cacerts_map:
       debian: /usr/local/share/ca-certificates
@@ -25,22 +23,45 @@
     - name: Download and install Goss
       get_url:
         url: "{{ goss_url }}"
-        dest: "{{ goss_dst }}"
+        dest: "{{ goss_bin }}"
         sha256sum: "{{ goss_sha256sum }}"
-        mode: 0755
+        mode: "u=rwx,go=rx"
       register: download_goss
       until: download_goss is succeeded
       retries: 3
 
+    - name: Create Molecule directory for test files
+      file:
+        path: "{{ goss_test_directory }}"
+        state: directory
+
+    - name: Find Goss tests on localhost
+      find:
+        paths: "{{ lookup('env', 'MOLECULE_VERIFIER_TEST_DIRECTORY') }}"
+        patterns:
+          - "test[-.\\w]*.yml"
+          - "test_host_{{ ansible_hostname }}[-.\\w]*.yml"
+        excludes:
+          - "test_host_(?!{{ ansible_hostname }})[-.\\w]*.yml"
+        use_regex: true
+      delegate_to: localhost
+      register: test_files
+      changed_when: false
+      become: false
+
+    - name: debug
+      debug:
+        msg: "{{ test_files.files }}"
+        verbosity: 3
+
     - name: Copy Goss tests to remote
       copy:
-        src: "{{ item }}"
-        dest: "{{ goss_test_directory }}/{{ item | basename }}"
-        force: true
-      with_fileglob:
-        - "{{ lookup('env', 'MOLECULE_VERIFIER_TEST_DIRECTORY') }}/test_*.yml"
+        src: "{{ item.path }}"
+        dest: "{{ goss_test_directory }}/{{ item.path | basename }}"
+      with_items:
+        - "{{ test_files.files }}"
       loop_control:
-        label: "{{ item | basename }}"
+        label: "{{ item.path | basename }}"
 
     - name: Register test files
       find:
@@ -52,16 +73,17 @@
 
     - block:
         - name: Execute Goss tests
-          command: "{{ goss_dst }} -g {{ item }} validate --format {{ goss_format }}"
-          register: test_results
-          with_items: "{{ test_files.files | map(attribute='path') | list }}"
-          loop_control:
-            label: "{{ item | basename }}"
+          command: "{{ goss_bin }} -g {{ item }} validate --format {{ goss_format }}"
           environment:
             OS_FAMILY: "{{ ansible_os_family | lower }}"
             DISTRO_MAJOR_VERSION: "{{ ansible_distribution_major_version }}"
             LOCAL_CACERTS: "{{ local_cacerts_map[ansible_os_family | lower] }}"
             TRUST_CACERTS: "{{ trust_cacerts_map[ansible_os_family | lower] }}"
+          register: test_results
+          with_items: "{{ test_files.files | map(attribute='path') | list }}"
+          loop_control:
+            label: "{{ item | basename }}"
+          failed_when: false
 
         - name: Display details about the Goss results
           debug:

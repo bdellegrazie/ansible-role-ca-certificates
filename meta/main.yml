@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: ca-certificates
   author: Brett Delle Grazie
   description: Role to manage CA Certificates
 
@@ -12,6 +13,7 @@ galaxy_info:
       versions:
         - 6
         - 7
+        - 8
     - name: Fedora
       versions:
         - all

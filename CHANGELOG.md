@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
+- Switched to Ansible 2.9.9 and Molecule 3.x
 ### Deprecated
 ### Removed
 ### Fixed
-- Fixed issue where the update trigger is skipped
 ### Security
+
+## [3.1.1] - 2020-06-05
+### Fixed
+- Fixed issue where the update trigger is skipped (#6, thanks @SamK)
+- Fixed Changelog hyperlinks (#7, thanks @SamK)
 
 ## [3.1.0] - 2020-01-11
 ### Changed
@@ -30,7 +35,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated Travis build process to use newer molecule process
 - Minor linting changes
 
-[Unreleased]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v3.1.0..HEAD
+[Unreleased]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v3.1.1..HEAD
+[3.1.1]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v3.1.1..v3.1.D
 [3.1.0]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v3.0.0..v3.1.0
 [3.0.0]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v2.1.1..v3.0.0
 [2.1.1]: https://github.com/bdellegrazie/ansible-role-ca-certificates/compare/v2.1.0..v2.1.1
