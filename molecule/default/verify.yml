@@ -33,6 +33,7 @@
     - name: Create Molecule directory for test files
       file:
         path: "{{ goss_test_directory }}"
+        mode: "u=rwx,g=rx,o="
         state: directory
 
     - name: Find Goss tests on localhost
@@ -58,6 +59,7 @@
       copy:
         src: "{{ item.path }}"
         dest: "{{ goss_test_directory }}/{{ item.path | basename }}"
+        mode: "u=rw,g=r,o="
       with_items:
         - "{{ test_files.files }}"
       loop_control:

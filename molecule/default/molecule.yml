@@ -1,11 +1,10 @@
 ---
-dependency:
-  name: gilt
 driver:
   name: docker
 lint: |
   set -e
   yamllint .
+  ansible-lint
 platforms:
   - name: centos6
     image: "geerlingguy/docker-centos6-ansible"
