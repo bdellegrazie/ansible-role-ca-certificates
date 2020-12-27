@@ -5,10 +5,10 @@
   hosts: all
   become: true
   vars:
-    goss_version: v0.3.10
+    goss_version: v0.3.16
     goss_arch: amd64
     goss_bin: /usr/local/bin/goss
-    goss_sha256sum: 150f25495ca0d1d4fd2ef8d0e750dbd767a15e9a522505f99b61dd1dd40a76d4
+    goss_sha256sum: 827e354b48f93bce933f5efcd1f00dc82569c42a179cf2d384b040d8a80bfbfb
     goss_url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
     goss_test_directory: /tmp/molecule/goss
     goss_format: documentation
