@@ -5,13 +5,13 @@ verify_ssl = true
 
 [dev-packages]
 ansible-lint = "*"
-ansible = "==2.9.16"
+ansible = "==2.10.0"
 molecule = {extras = ["docker", "lint"],version = "*"}
 pre-commit = "*"
 python-gilt = "*"
 yamllint = "*"
 
 [packages]
-ansible = "==2.9.16"
+ansible = "==2.10.0"
 passlib = "*"
 six = "*"
