@@ -2,8 +2,10 @@
 - name: Install trusted CA Certificates
   become: true
   copy:
-    content: "{{ item.pem }}"
+    content: "{{ item.pem | default(omit) }}"
     dest: "{{ ca_certificates_local_dir }}/{{ item.name }}.crt"
+    src: "{{ item.src | default(omit) }}"
+    remote_src: "{{ item.remote_src | default(omit) }}"
     group: root
     mode: '0644'
     owner: root
