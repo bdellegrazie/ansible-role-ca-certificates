@@ -10,7 +10,7 @@
     mode: '0644'
     owner: root
   with_items: "{{ ca_certificates_trusted }}"
-  when: item.pem is defined
+  when: (item.pem is defined or item.src is defined)
   loop_control:
     label: "{{ item.name }}"
   register: _ca_certificates_copied
